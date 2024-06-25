@@ -27,8 +27,11 @@ import os
 
 # sender_id = "FSTSMS"
 
-account_sid = 'AC8a72870f69adf4ce956f2eabc802f401' # Your Twilio account SID
-auth_token = '8d8c86b6076d5851371d9b653daf5eb7'   # Your Twilio auth token
+#account_sid = 'AC8a72870f69adf4ce956f2eabc802f401' # Your Twilio account SID
+#auth_token = '8d8c86b6076d5851371d9b653daf5eb7'   # Your Twilio auth token
+#client = Client(account_sid, auth_token)
+account_sid = ' ' # Your Twilio account SID
+auth_token = ' '   # Your Twilio auth token
 client = Client(account_sid, auth_token)
 
 
