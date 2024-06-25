@@ -23,16 +23,9 @@ import os
 # Consider using a secrets management tool (like Hashicorp Vault, 
 # AWS Secrets Manager, or Azure Key Vault) for more secure handling of production credentials.
 
-# api_key = "Eb1xlfN87vgOHTZUFCznDpKdVQqoeWcyIMJjGwmXRsB45ar2AhYqrj3HKPRmUz0y4xX96bp8dNlGQf1D"
 
-# sender_id = "FSTSMS"
 
-#account_sid = 'AC8a72870f69adf4ce956f2eabc802f401' # Your Twilio account SID
-#auth_token = '8d8c86b6076d5851371d9b653daf5eb7'   # Your Twilio auth token
-#client = Client(account_sid, auth_token)
-account_sid = ' ' # Your Twilio account SID
-auth_token = ' '   # Your Twilio auth token
-client = Client(account_sid, auth_token)
+
 
 
 
@@ -408,14 +401,13 @@ class RealTimePred:
                         message=("your attendance recorded", text_gen, person_role,current_time)
 
                   
-                    try:
-                         client.messages.create(body=message,
-                         from_='+16817717191',
-                         to=mobile_number)
-                         print(f"SMS sent successfully: {message.sid}")
-                    except Exception as e:
-                        
-                          print(f"Error sending SMS: {e}")
+                    
+                        #  client.messages.create(body=message,
+                        #  from_='+16817717191',
+                        #  to=mobile_number)
+                        #  print(f"SMS sent successfully: {message.sid}")
+                                            
+                        print(f"Error sending SMS: {e}")
 
                 else:
                      print("No matching record found.")
