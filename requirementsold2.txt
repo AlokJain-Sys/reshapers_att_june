@@ -1,0 +1,15 @@
+av==12.1.0
+insightface==0.7.3
+numpy==2.0.0
+opencv_contrib_python==4.10.0.84
+opencv_python==4.10.0.84
+opencv_python_headless==4.10.0.84
+pandas==2.2.2
+Pillow==10.3.0
+PyYAML==6.0.1
+PyYAML==6.0.1
+redis==5.0.6
+scikit_learn==1.5.0
+streamlit==1.35.0
+streamlit_authenticator==0.3.2
+streamlit_webrtc==0.47.7

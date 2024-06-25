@@ -1,0 +1,21 @@
+credentials:
+  usernames:
+    admin:
+      email: jainallo@gmail.com
+      failed_login_attempts: 0 # Will be managed automatically
+      logged_in: False # Will be managed automatically
+      name: Alok Jain
+      password: $2a$10$G.8ZhmYGvpnUaY26QFGad.BHmRb2/glGWSThMzIwxGJZCjy6Vf3Ke # Will be hashed automatically Alok@#789
+    rbriggs:
+      email: rbriggs@gmail.com
+      failed_login_attempts: 0 # Will be managed automatically
+      logged_in: False # Will be managed automatically
+      name: Rebecca Briggs
+      password: $2a$10$yTD0C.1InYKITofjWB4.aOfkx6U3LnhuqZyOE03XOnxH2XJ.T7du. # Will be hashed automatically #def
+cookie:
+  expiry_days: 0
+  key: "randomly_generated_secure_string" # Must be string
+  name: facesystem
+preauthorized:
+  emails:
+    - jainallo@gmail.com

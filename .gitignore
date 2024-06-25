@@ -1,0 +1,11 @@
+# Virtual environments
+app/venv/
+venv/
+.venv/
+
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# Other temporary files
+*.tmp
