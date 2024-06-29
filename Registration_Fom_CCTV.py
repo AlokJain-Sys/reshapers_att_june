@@ -5,25 +5,11 @@ import numpy as np
 import redis
 import os
 from face_rec import r as rcctv
-#from dotenv import load_dotenv
 
-#load_dotenv()
-
-# Connect to Redis Client
-# hostname = os.getenv("REDIS_HOSTNAME")  
-# portnumber = int(os.getenv("REDIS_PORT")) 
-# password = os.getenv("REDIS_PASSWORD") 
-
-# r = redis.StrictRedis(host=hostname,
-#                       port=portnumber,
-#                       password=password,
-#                       decode_responses=True)
-
-# Configure face analysis
 faceapp = FaceAnalysis(name='buffalo_sc', root='insightface_model', providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
 faceapp.prepare(ctx_id=0, det_size=(640, 640), det_thresh=0.5)
 
-class RegistrationForm:
+class RegistrationFormcc:
     def __init__(self, rtsp_url="rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101"):
         self.sample = 0
         self.rtsp_url = rtsp_url

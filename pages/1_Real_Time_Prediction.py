@@ -6,7 +6,7 @@ import time
 
 from utils import set_page_config
 
-set_page_config()# Loading Image using PIL
+#set_page_config()# Loading Image using PIL
 
 st.subheader('Real-Time Prediction Attendance System')
 

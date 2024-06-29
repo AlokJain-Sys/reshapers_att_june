@@ -405,9 +405,7 @@ class RealTimePred:
                         #  client.messages.create(body=message,
                         #  from_='+16817717191',
                         #  to=mobile_number)
-                        #  print(f"SMS sent successfully: {message.sid}")
-                                            
-                        print(f"Error sending SMS: {e}")
+                        #  print(f"SMS sent successfully: {message.sid}")       print(f"Error sending SMS: {e}")
 
                 else:
                      print("No matching record found.")
