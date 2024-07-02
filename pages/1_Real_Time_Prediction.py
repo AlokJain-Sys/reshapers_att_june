@@ -16,10 +16,18 @@ st.dataframe(redis_face_db)
 
 input_source = st.radio(
     "Select Input Source",
-    ["Webcam", "RTSP CCTV Camera"],
+    ["RTSP CCTV Camera","Webcam"],
     key="input_source"  # Add a key for session state
 )
 
+
+
+if input_source == "RTSP CCTV Camera":
+    rtsp_url = st.text_input("RTSP URL:", type="password", value="rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101")
+    if not rtsp_url:
+        st.warning("Please enter a valid RTSP URL.")
+        
+    realtimepred = face_rec.RealTimePred(rtsp_url=rtsp_url)
 if input_source == "Webcam":
     # Check for available cameras
     available_cameras = []
@@ -34,15 +42,7 @@ if input_source == "Webcam":
         realtimepred = face_rec.RealTimePred()
     else:
         st.error("No webcam found.")
-        pass
-
-elif input_source == "RTSP CCTV Camera":
-    rtsp_url = st.text_input("RTSP URL:", value="rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101")
-    if not rtsp_url:
-        st.warning("Please enter a valid RTSP URL.")
-        pass
-    realtimepred = face_rec.RealTimePred(rtsp_url=rtsp_url)
-        
+                
 waitTime = 30 # time in sec
 setTime = time.time()
 # rtsp_url = "rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101"
