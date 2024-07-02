@@ -3,31 +3,55 @@ from Home import face_rec
 from streamlit_webrtc import webrtc_streamer
 import av
 import time
-
+import cv2
 from utils import set_page_config
 
-#set_page_config()# Loading Image using PIL
-
-st.subheader('Real-Time Prediction Attendance System')
+st.subheader('Reshapers Real-Time Prediction Attendance System')
 
 
 # Retrive the data from Redis Database
-with st.spinner('Retriving Data from Redis DB ...'):    
-    redis_face_db = face_rec.retrive_data2(name='contact1:register')
-    st.dataframe(redis_face_db)
-    
-st.success("Data sucessfully retrived from DB")
+redis_face_db = face_rec.retrive_data2(name='contact1:register')
+st.dataframe(redis_face_db)
 
-# time 
+
+input_source = st.radio(
+    "Select Input Source",
+    ["Webcam", "RTSP CCTV Camera"],
+    key="input_source"  # Add a key for session state
+)
+
+if input_source == "Webcam":
+    # Check for available cameras
+    available_cameras = []
+    for i in range(10):
+        cap = cv2.VideoCapture(i)
+        if cap.isOpened():
+            available_cameras.append(i)
+            cap.release()
+
+    if available_cameras:
+        selected_camera = st.selectbox("Select Webcam", available_cameras)
+        realtimepred = face_rec.RealTimePred()
+    else:
+        st.error("No webcam found.")
+        pass
+
+elif input_source == "RTSP CCTV Camera":
+    rtsp_url = st.text_input("RTSP URL:", value="rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101")
+    if not rtsp_url:
+        st.warning("Please enter a valid RTSP URL.")
+        pass
+    realtimepred = face_rec.RealTimePred(rtsp_url=rtsp_url)
+        
 waitTime = 30 # time in sec
 setTime = time.time()
-rtsp_url = "rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101"
-rtsp_url = ""
-if rtsp_url :
+# rtsp_url = "rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101"
+
+# if rtsp_url :
     
-    realtimepred = face_rec.RealTimePred(rtsp_url) # real time prediction class
-else :
-    realtimepred = face_rec.RealTimePred() # real time prediction class
+#     realtimepred = face_rec.RealTimePred(rtsp_url) # real time prediction class
+# else :
+#     realtimepred = face_rec.RealTimePred() # real time prediction class
 # Real Time Prediction
 # streamlit webrtc
 # callback function
