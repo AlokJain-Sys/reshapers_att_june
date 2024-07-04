@@ -33,10 +33,12 @@ import os
 hostname = 'redis-15743.c93.us-east-1-3.ec2.redns.redis-cloud.com'
 portnumber = 15743
 password = 'Y2VYMrmEUDMFuugSbtEIbLQ5s4wzATII'
+socket_timeout1=8
 
 r = redis.StrictRedis(host=hostname,
                       port=portnumber,
-                      password=password)
+                      password=password,
+                      socket_timeout=socket_timeout1)
 
 # Retrive Data from database
 def retrive_data(name):

@@ -3,55 +3,24 @@ from Home import face_rec
 from streamlit_webrtc import webrtc_streamer
 import av
 import time
-import cv2
-from utils import set_page_config
 
-st.subheader('Reshapers Real-Time Prediction Attendance System')
+
+st.subheader('Real-Time Prediction Attendance System')
 
 
 # Retrive the data from Redis Database
-redis_face_db = face_rec.retrive_data2(name='contact1:register')
-st.dataframe(redis_face_db)
+with st.spinner('Retriving Data from Redis DB ...'):    
+    redis_face_db = face_rec.retrive_data2(name='contact1:register')
+    st.dataframe(redis_face_db)
+    
+st.success("Data sucessfully retrived from Redis")
 
-
-input_source = st.radio(
-    "Select Input Source",
-    ["RTSP CCTV Camera","Webcam"],
-    key="input_source"  # Add a key for session state
-)
-
-
-
-if input_source == "RTSP CCTV Camera":
-    rtsp_url = st.text_input("RTSP URL:", type="password", value="rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101")
-    if not rtsp_url:
-        st.warning("Please enter a valid RTSP URL.")
-        
-    realtimepred = face_rec.RealTimePred(rtsp_url=rtsp_url)
-if input_source == "Webcam":
-    # Check for available cameras
-    available_cameras = []
-    for i in range(10):
-        cap = cv2.VideoCapture(i)
-        if cap.isOpened():
-            available_cameras.append(i)
-            cap.release()
-
-    if available_cameras:
-        selected_camera = st.selectbox("Select Webcam", available_cameras)
-        realtimepred = face_rec.RealTimePred()
-    else:
-        st.error("No webcam found.")
-                
+# time 
 waitTime = 30 # time in sec
 setTime = time.time()
-# rtsp_url = "rtsp://admin:ab@123456@122.160.10.254/Streaming/Channels/101"
+rtsp_url = "rtsp://admin:ab@123456@122.160.10.254:554/Streaming/Channels/101"
+realtimepred = face_rec.RealTimePred(rtsp_url=rtsp_url) # real time prediction class
 
-# if rtsp_url :
-    
-#     realtimepred = face_rec.RealTimePred(rtsp_url) # real time prediction class
-# else :
-#     realtimepred = face_rec.RealTimePred() # real time prediction class
 # Real Time Prediction
 # streamlit webrtc
 # callback function
@@ -82,4 +51,3 @@ webrtc_streamer(key="realtimePrediction", video_frame_callback=video_frame_callb
         "video": {"width": 640, "height": 480, "frameRate": {"ideal": 15, "max": 20}},"timeout": 60000,  # Reduce resolution and frame rate
     }
     )
-
