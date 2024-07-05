@@ -7,9 +7,11 @@ import redis
 from insightface.app import FaceAnalysis
 from sklearn.metrics import pairwise
 # time
-import time
-from datetime import datetime,date 
 import os
+from datetime import datetime, timezone, timedelta,date,time
+import pytz
+
+IST = pytz.timezone('Asia/Kolkata')
 
 
 
@@ -315,13 +317,14 @@ class RealTimePred:
     def face_prediction(self,test_image, dataframe,feature_column,
                             name_role=['Name','Role'],thresh=0.5):
         # step-1: find the time
-        current_time = str(datetime.now())
+        current_time = str(datetime.now(IST).isoformat())
         
         # step-1: take the test image and apply to insight face
         results = faceapp.get(test_image)
         test_copy = test_image.copy()
         #Seen_today for SMS
-        today = date.today()
+        today_ist = datetime.now(IST)
+        today = today_ist.date()
         seen_today = set()  # Track who has been seen today
 
         # step-2: use for loop and extract each embedding and pass to ml_search_algorithm

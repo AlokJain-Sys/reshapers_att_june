@@ -9,12 +9,16 @@ from sklearn.metrics import pairwise
 from insightface.model_zoo import get_model
 #sms
 from twilio.rest import Client
+import os
 import loadenv
 #from twillo import SMS
 # time
 import time
-from datetime import datetime,date 
-import os
+
+from datetime import datetime, timezone, timedelta,date
+import pytz
+
+IST = pytz.timezone('Asia/Kolkata')
 
 #Fast2SMS_API_Auth_Key = os.environ.get('Fast2SMS_API_Auth_Key')
 #sender_id = os.environ.get('Sender_ID)
@@ -340,7 +344,7 @@ class RealTimePred:
     def face_prediction(self,test_image, dataframe,feature_column,
                             name_role=['Name','Role'],thresh=0.5):
         # step-1: find the time
-        current_time = str(datetime.now())
+        current_time = str(datetime.now(IST).isoformat())
         ret, test_image = self.cap.read()  # Read frame from camera
 
         # Error handling for camera failure
@@ -352,7 +356,8 @@ class RealTimePred:
         results = faceapp.get(test_image)
         test_copy = test_image.copy()
         #Seen_today for SMS
-        today = date.today()
+        today_ist = datetime.now(IST)
+        today = today_ist.date()
         seen_today = set()  # Track who has been seen today
 
         # step-2: use for loop and extract each embedding and pass to ml_search_algorithm

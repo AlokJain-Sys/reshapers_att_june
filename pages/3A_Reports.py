@@ -13,7 +13,7 @@ attendance_logs = [log.decode('utf-8') for log in attendance_logs]
 # --- Convert logs to DataFrame ---
 logs_df = pd.DataFrame([log.split('@') for log in attendance_logs], 
                       columns=['Name', 'Role', 'Timestamp'])
-logs_df['Timestamp'] = pd.to_datetime(logs_df['Timestamp'])
+logs_df['Timestamp'] = pd.to_datetime(logs_df['Timestamp'], format='ISO8601')
 
 # --- Streamlit UI ---
 st.title("Attendance Report ")

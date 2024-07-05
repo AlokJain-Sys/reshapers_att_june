@@ -44,7 +44,7 @@ with tab3:
     logs_df = pd.DataFrame(logs_nested_list,columns=['Name','Role','Timestamp'])       
     # Step -3 Time Based Analysis or Report 
 
-    logs_df['Timestamp'] = pd.to_datetime(logs_df['Timestamp'])
+    logs_df['Timestamp'] = pd.to_datetime(logs_df['Timestamp'], format='ISO8601')
     logs_df['Date']=logs_df['Timestamp'].dt.date
     
     # step -3.1 : Cal.InTime and Out Time

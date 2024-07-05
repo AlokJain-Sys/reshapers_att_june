@@ -39,7 +39,7 @@ for col in required_columns:
         st.stop()
 
 # Convert Timestamp to datetime
-logs_df['Timestamp'] = pd.to_datetime(logs_df['Timestamp'])
+logs_df['Timestamp'] = pd.to_datetime(logs_df['Timestamp'],format='ISO8601')
 logs_df['Date'] = logs_df['Timestamp'].dt.date
 
 def assign_shift(timestamp):

@@ -3,7 +3,11 @@ from Home import face_rec
 from streamlit_webrtc import webrtc_streamer
 import av
 import time
+import time
+from datetime import datetime, timezone, timedelta,date
+import pytz
 
+IST = pytz.timezone('Asia/Kolkata')
 
 st.subheader('Real-Time Prediction Attendance System')
 
