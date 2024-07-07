@@ -47,9 +47,9 @@ def assign_shift(timestamp):
     if 6 <= hour < 14:
         return "Morning"
     elif 14 <= hour < 22:
-        return "Evening"
+        return "AfterNoon"
     else:
-        return "Night"
+        return "Evening"
 
 def add_shift_column(logs_df):
     logs_df["Shift"] = logs_df["Timestamp"].apply(assign_shift)
